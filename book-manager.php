@@ -11,9 +11,14 @@
  * Domain Path: /languages
  */
 
+use BookManager\Providers\BookServiceProvider;
 use Rabbit\Application;
+use Rabbit\Database\DatabaseServiceProvider;
+use Rabbit\Logger\LoggerServiceProvider;
 use Rabbit\Plugin;
 use Rabbit\Redirects\AdminNotice;
+use Rabbit\Redirects\RedirectServiceProvider;
+use Rabbit\Templates\TemplatesServiceProvider;
 use Rabbit\Utils\Singleton;
 use Exception;
 use League\Container\Container;
@@ -163,6 +168,12 @@ class BookManager extends Singleton {
 	 * @return void
 	 */
 	private function registerServices() {
+		$this->application->addServiceProvider( RedirectServiceProvider::class );
+		$this->application->addServiceProvider( DatabaseServiceProvider::class );
+		$this->application->addServiceProvider( TemplatesServiceProvider::class );
+		$this->application->addServiceProvider( LoggerServiceProvider::class );
+
+		$this->application->addServiceProvider( BookServiceProvider::class );
 	}
 
 	/**
@@ -174,6 +185,11 @@ class BookManager extends Singleton {
 	 * @return void
 	 */
 	private function setupHooks() {
+		if ( $this->application->has( 'books.repo' ) ) {
+			$this->application->get( 'books.repo' )->create_table();
+		}
+
+		flush_rewrite_rules();
 	}
 }
 
