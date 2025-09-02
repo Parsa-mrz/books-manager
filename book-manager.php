@@ -93,6 +93,11 @@ class BookManager extends Singleton {
 			 */
 			$this->registerServices();
 
+			if ( $this->application->has( BookServiceProvider::class ) ) {
+				$provider = $this->application->get( BookServiceProvider::class );
+				$provider->boot();
+			}
+
 			/**
 			 * Activation hooks
 			 */
@@ -113,6 +118,7 @@ class BookManager extends Singleton {
 			$this->application->boot(
 				function ( Plugin $plugin ) {
 					$plugin->loadPluginTextDomain();
+					$this->boot_hooks();
 				}
 			);
 
@@ -172,7 +178,6 @@ class BookManager extends Singleton {
 		$this->application->addServiceProvider( DatabaseServiceProvider::class );
 		$this->application->addServiceProvider( TemplatesServiceProvider::class );
 		$this->application->addServiceProvider( LoggerServiceProvider::class );
-
 		$this->application->addServiceProvider( BookServiceProvider::class );
 	}
 
@@ -190,6 +195,15 @@ class BookManager extends Singleton {
 		}
 
 		flush_rewrite_rules();
+	}
+
+	/**
+	 * Sets up runtime hooks for the plugin.
+	 *
+	 * @return void
+	 */
+	private function boot_hooks() {
+		add_action( 'init', callback: array( $this->application->get( 'books.cpt' ), 'register' ) );
 	}
 }
 

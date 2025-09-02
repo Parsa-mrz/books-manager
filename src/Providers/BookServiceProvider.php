@@ -1,8 +1,11 @@
 <?php
 namespace BookManager\Providers;
 
-use BookManager\Repositories\BooksInfoRepository;
+use BookManager\Services\Book\PostTypes\BookPostType;
+use BookManager\Services\Book\Repositories\BooksInfoRepository;
+use League\Container\Container;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class BookServiceProvider
@@ -24,8 +27,6 @@ class BookServiceProvider extends AbstractServiceProvider {
 		'wpdb',
 		'books.repo',
 		'books.cpt',
-		'books.metabox',
-		'books.admin',
 	);
 
 	/**
@@ -47,6 +48,14 @@ class BookServiceProvider extends AbstractServiceProvider {
 			'books.repo',
 			function () use ( $container ) {
 				return new BooksInfoRepository( $container->get( 'wpdb' ) );
+			}
+		);
+
+		// CPT and Taxonomies Register.
+		$container->add(
+			'books.cpt',
+			function () {
+				return new BookPostType();
 			}
 		);
 	}

@@ -1,5 +1,5 @@
 <?php
-namespace BookManager\Repositories;
+namespace BookManager\Services\Book\Repositories;
 
 use wpdb;
 
