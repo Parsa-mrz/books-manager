@@ -35,16 +35,7 @@ class BooksInfoRepository {
 	 */
 	public function __construct( wpdb $wpdb ) {
 		$this->wpdb  = $wpdb;
-		$this->table = $this->wpdb->prefix . 'books_info';
-	}
-
-	/**
-	 * Get the name of the custom table.
-	 *
-	 * @return string
-	 */
-	public function table_name(): string {
-		return $this->table;
+		$this->table = $wpdb->prefix . 'books_info';
 	}
 
 	/**
@@ -63,9 +54,94 @@ class BooksInfoRepository {
 			post_id bigint(20) unsigned NOT NULL,
 			isbn varchar(32) NOT NULL,
 			PRIMARY KEY  (ID),
-			UNIQUE KEY post_id (post_id)
+			UNIQUE KEY post_id (post_id) isbn
 		) {$charset_collate};";
 
 		dbDelta( $sql );
+	}
+
+	/**
+	 * Saves or updates the ISBN for a given post ID.
+	 *
+	 * @param int    $post_id The ID of the book post.
+	 * @param string $isbn    The ISBN value (ISBN-10 or ISBN-13).
+	 * @return bool True on success, false on failure or invalid input.
+	 */
+	public function save_isbn( int $post_id, string $isbn ): bool {
+		if ( $post_id <= 0 || strlen( $isbn ) > 32 ) {
+			return false;
+		}
+
+		global $wpdb;
+		$data   = array(
+			'post_id' => $post_id,
+			'isbn'    => $isbn,
+		);
+		$format = array( '%d', '%s' );
+
+		$query           = $wpdb->prepare(
+			"SELECT post_id FROM {$this->table} WHERE post_id = %d",
+			$post_id
+		);
+		$existing_record = $wpdb->get_var( $query );
+
+		if ( $existing_record ) {
+			$result = $this->wpdb->update(
+				$this->table,
+				$data,
+				array( 'post_id' => $post_id ),
+				$format,
+				array( '%d' )
+			);
+		} else {
+			$result = $this->wpdb->insert( $this->table, $data, $format );
+		}
+
+		if ( false === $result && ! empty( $wpdb->last_error ) ) {
+			error_log( 'BooksInfoRepository::save_isbn failed: ' . $wpdb->last_error );
+		}
+
+		return false !== $result;
+	}
+
+
+	/**
+	 * Deletes the ISBN record for a given post ID.
+	 *
+	 * @param int $post_id The ID of the book post.
+	 * @return bool True on success, false on failure or if no record exists.
+	 */
+	public function delete_isbn( int $post_id ): bool {
+		if ( $post_id <= 0 ) {
+			return false;
+		}
+
+		$result = $this->wpdb->delete(
+			$this->table,
+			array( 'post_id' => $post_id ),
+			array( '%d' )
+		);
+
+		return false !== $result;
+	}
+
+	/**
+	 * Retrieves the ISBN for a given post ID.
+	 *
+	 * @param int $post_id The ID of the book post.
+	 * @return string The ISBN if found, empty string otherwise.
+	 */
+	public function get_isbn_by_post_id( int $post_id ): string {
+		if ( $post_id <= 0 ) {
+			return '';
+		}
+
+		$query  = $this->wpdb->prepare(
+			"SELECT isbn FROM {$this->table} WHERE post_id = %d",
+			$post_id
+		);
+		$result = $this->wpdb->get_var( $query );
+
+		return $result ?? '';
 	}
 }
