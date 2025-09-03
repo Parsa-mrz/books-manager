@@ -144,4 +144,13 @@ class BooksInfoRepository {
 
 		return $result ?? '';
 	}
+
+	/**
+	 * Retrieves all books from the custom table.
+	 *
+	 * @return array<int, object>
+	 */
+	public function get_all_books(): array {
+		return $this->wpdb->get_results( "SELECT * FROM $this->table" );
+	}
 }
