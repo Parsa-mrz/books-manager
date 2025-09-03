@@ -1,0 +1,153 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Book Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-03 21:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.2.29\n"
+"X-Domain: book-manager"
+
+#. URI of the plugin
+msgid "#"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"A plugin to manage book information, including ISBNs, using a custom "
+"database table."
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:53
+msgid "Actions"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:43
+msgid "Add New"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:44
+msgid "Add New Book"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:98
+msgid "Author"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:97
+msgid "Authors"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:42
+msgid "Book"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:34
+msgid "book"
+msgstr ""
+
+#: src/Services/Book/Metaboxes/BookMetabox.php:38
+msgid "Book ISBN"
+msgstr ""
+
+#. Name of the plugin
+#: src/Services/Book/Admin/AdminPage.php:42
+#: src/Services/Book/Admin/AdminPage.php:43
+msgid "Book Manager"
+msgstr ""
+
+#: book-manager.php:43
+msgid "Book Manager Plugin requires Composer dependencies to be installed."
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:51
+msgid "Book Title"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:41
+#: src/Services/Book/PostTypes/BookPostType.php:51
+msgid "Books"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:35
+msgid "books"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:107
+msgid "Edit"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:45
+msgid "Edit Book"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://parsamirzaie.com"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:49
+msgid "ID"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:52
+msgid "ISBN"
+msgstr ""
+
+#: src/Services/Book/Metaboxes/BookMetabox.php:55
+msgid "ISBN:"
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:79
+#: src/Services/Book/Admin/BooksListTable.php:102
+msgid "N/A"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:46
+msgid "New Book"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:49
+msgid "No books found"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:50
+msgid "No books found in Trash"
+msgstr ""
+
+#. Author of the plugin
+msgid "Parsa Mirzaie"
+msgstr ""
+
+#: book-manager.php:44
+msgid ""
+"Please run `composer install` from the plugin directory to activate this "
+"plugin."
+msgstr ""
+
+#: src/Services/Book/Admin/BooksListTable.php:50
+msgid "Post ID"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:82
+msgid "Publisher"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:81
+msgid "Publishers"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:48
+msgid "Search Books"
+msgstr ""
+
+#: src/Services/Book/PostTypes/BookPostType.php:47
+msgid "View Book"
+msgstr ""
