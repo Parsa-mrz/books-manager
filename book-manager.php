@@ -206,6 +206,7 @@ class BookManager extends Singleton {
 		add_action( 'init', callback: array( $this->application->get( 'books.cpt' ), 'register' ) );
 		add_action( 'add_meta_boxes', array( $this->application->get( 'books.metabox' ), 'add_metabox' ) );
 		add_action( 'save_post', array( $this->application->get( 'books.metabox' ), 'save_metabox' ) );
+		add_action( 'admin_menu', array( $this->application->get( 'books.admin' ), 'add_menu_page' ) );
 	}
 }
 

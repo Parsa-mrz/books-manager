@@ -1,6 +1,7 @@
 <?php
 namespace BookManager\Providers;
 
+use BookManager\Services\Book\Admin\AdminPage;
 use BookManager\Services\Book\Metaboxes\BookMetabox;
 use BookManager\Services\Book\PostTypes\BookPostType;
 use BookManager\Services\Book\Repositories\BooksInfoRepository;
@@ -27,6 +28,7 @@ class BookServiceProvider extends AbstractServiceProvider {
 		'books.repo',
 		'books.cpt',
 		'books.metabox',
+		'books.admin',
 	);
 
 	/**
@@ -64,6 +66,14 @@ class BookServiceProvider extends AbstractServiceProvider {
 			'books.metabox',
 			function () use ( $container ) {
 				return new BookMetabox( $container->get( 'books.repo' ) );
+			}
+		);
+
+		// Admin page.
+		$container->add(
+			'books.admin',
+			function () {
+				return new AdminPage();
 			}
 		);
 	}
