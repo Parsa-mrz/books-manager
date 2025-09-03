@@ -23,7 +23,7 @@ Built with ❤️ using the [Rabbit Framework](https://github.com/veronalabs/rab
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/Parsa-mrz/book-manager.git
+git clone https://github.com/Parsa-mrz/books-manager.git
 cd book-manager
 ```
 
