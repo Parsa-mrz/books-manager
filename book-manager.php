@@ -204,6 +204,8 @@ class BookManager extends Singleton {
 	 */
 	private function boot_hooks() {
 		add_action( 'init', callback: array( $this->application->get( 'books.cpt' ), 'register' ) );
+		add_action( 'add_meta_boxes', array( $this->application->get( 'books.metabox' ), 'add_metabox' ) );
+		add_action( 'save_post', array( $this->application->get( 'books.metabox' ), 'save_metabox' ) );
 	}
 }
 

@@ -1,11 +1,10 @@
 <?php
 namespace BookManager\Providers;
 
+use BookManager\Services\Book\Metaboxes\BookMetabox;
 use BookManager\Services\Book\PostTypes\BookPostType;
 use BookManager\Services\Book\Repositories\BooksInfoRepository;
-use League\Container\Container;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Psr\Container\ContainerInterface;
 
 /**
  * Class BookServiceProvider
@@ -27,6 +26,7 @@ class BookServiceProvider extends AbstractServiceProvider {
 		'wpdb',
 		'books.repo',
 		'books.cpt',
+		'books.metabox',
 	);
 
 	/**
@@ -56,6 +56,14 @@ class BookServiceProvider extends AbstractServiceProvider {
 			'books.cpt',
 			function () {
 				return new BookPostType();
+			}
+		);
+
+		// Metabox.
+		$container->add(
+			'books.metabox',
+			function () use ( $container ) {
+				return new BookMetabox( $container->get( 'books.repo' ) );
 			}
 		);
 	}

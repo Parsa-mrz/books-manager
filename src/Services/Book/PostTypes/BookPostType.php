@@ -7,6 +7,8 @@ namespace BookManager\Services\Book\PostTypes;
  *
  * Registers the custom post type 'book' and associated taxonomies 'publisher' and 'authors'
  * for the Book Manager plugin.
+ *
+ * @package BookManager\PostTypes
  */
 class BookPostType {
 
